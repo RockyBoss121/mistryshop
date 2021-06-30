@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<!-- {% load static %}
+{% load crispy_forms_tags %} -->
+<html lang="en">
+
+<!-- Mirrored from admin.pixelstrap.com/cuba/theme/projectcreate.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Apr 2021 09:13:01 GMT -->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+  <meta name="keywords"
+    content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
+  <meta name="author" content="pixelstrap">
+  <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+  <title>Mystery Shopper</title>
+  <!-- Google font-->
+  <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
+  <!-- ico-font-->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/icofont.css' %}">
+  <!-- Themify icon-->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/themify.css' %}">
+  <!-- Flag icon-->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/flag-icon.css' %}">
+  <!-- Feather icon-->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/feather-icon.css' %}">
+  <!-- Plugins css start-->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/scrollbar.css' %}">
+
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/animate.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/date-picker.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/dropzone.css' %}">
+  <!-- Plugins css Ends-->
+  <!-- Bootstrap css-->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/bootstrap.css' %}">
+  <!-- App css-->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <link id="color" rel="stylesheet" href="{% static 'css/color-1.css" media="screen' %}">
+  <!-- Responsive css-->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+
+</head>
+
+<body>
+  <!-- tap on top starts-->
+  <div class="tap-top"><i data-feather="chevrons-up"></i></div>
+  <!-- tap on tap ends-->
+  <!-- page-wrapper Start-->
+  <div class="page-wrapper default-wrapper" id="pageWrapper">
+    <!-- Page Header Start-->
+    <div class="page-header">
+      <div class="header-wrapper row m-0">
+
+        <div class="header-logo-wrapper col-auto p-0">
+          <div class="logo-wrapper"><a href="index.html"><img class="img-fluid" src="../assets/images/logo/logo.png"
+                alt=""></a></div>
+          <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i>
+          </div>
+        </div>
+        <div class="left-header col-8 horizontal-wrapper ps-0">
+          <ul class="horizontal-menu">
+            <li class="mega-menu outside"><a class="nav-link" href="projectcreate.html"><i
+                  data-feather="layers"></i><span>Request Surveys</span></a>
+
+            </li>
+
+            <li class="level-menu outside"><a class="nav-link" href="list-products.html"><i
+                  data-feather="inbox"></i><span>All Surveys</span></a>
+
+            </li>
+          </ul>
+        </div>
+        <div class="nav-right col-4 pull-right right-header p-0">
+          <ul class="nav-menus">
+
+            <li class="profile-nav onhover-dropdown p-0 me-0">
+              <div class="media profile-media"><img class="b-r-10" src="../assets/images/dashboard/profile.jpg" alt="">
+                <div class="media-body"><span>Emay Walter</span>
+                  <p class="mb-0 font-roboto">Admin <i class="middle fa fa-angle-down"></i></p>
+                </div>
+              </div>
+              <ul class="profile-dropdown onhover-show-div">
+                <li><a href="edit-profile.html"><i data-feather="user"></i><span>Account </span></a></li>
+                <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>
+                <li><a href="task.html"><i data-feather="file-text"></i><span>Taskboard</span></a></li>
+                <li><a href="login.html"><i data-feather="log-in"> </i><span>Log in</span></a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <!-- Page Header Ends                              -->
+    <!-- Page Body Start-->
+    <div class="page-body-wrapper default-menu default-menu">
+      <!-- Page Sidebar Start-->
+
+      <!-- Page Sidebar Ends-->
+      <div class="page-body">
+        <div class="container-fluid">
+          <div class="page-title">
+            <div class="row">
+              <div class="col-6">
+                <h3>
+                  Request to Survey</h3>
+              </div>
+              <div class="col-6">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="index.html"> <i data-feather="home"></i></a></li>
+                  <li class="breadcrumb-item">Apps</li>
+                  <li class="breadcrumb-item active">Project Create </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-body">
+                  <form class="form theme-form" enctype="multipart/form-data">
+                    
+                    
+                   
+
+                   
+                        <div class=" row">
+                          <h6>MCQ Question</h6>
+                          <hr>
+
+                          <div class="score hide">
+                            <div class="message"></div>
+                            <div class="result"></div>
+                            <button class="show-answers">Show Results</button>
+                            <button class="try-again">Try Again</button>
+                          </div>
+                              
+                          <div class="question-box one">
+                            {% for i in display.display.all %}
+                            <div class="question-head">
+                              <div class="question-one">Question One</div>
+                              <div class="question">{{i.question}}</div>
+                            </div>
+                            <ol>
+                              <li class="option">
+                                <label>
+                                  <input type="radio" class="answer" name="one" value="false">
+                                  <span>{{i.option1}}</span>
+                                </label>
+                              </li>
+                              <li class="option">
+                                <label>
+                                  <input type="radio" class="answer" name="one" value="true">
+                                  <span>{{i.option2}}</span>
+                                </label>
+                              </li>
+                              <li class="option">
+                                <label>
+                                  <input type="radio" class="answer" name="one" value="false">
+                                  <span>{{i.option3}}</span>
+                                </label>    
+                              </li>
+                              <li class="option">
+                                <label>
+                                  <input type="radio" class="answer" name="one" value="false">
+                                  <span>{{i.option4}}</span>
+                                </label>
+                              </li>
+                            </ol>
+                          
+                            <div class="nav-buttons">
+                            <a class="prev">Previous</a>
+                            <a class="next">Finish Quiz</a>
+                            {% endfor%}
+                          </div>
+                          </div>
+                      
+                          
+                        </div>
+
+                        <div class="row">
+
+                          <div class="col">
+                            <div class="text-end"><button class="btn btn-success me-3" onclick="submitBookMark()">Submit
+                                All</button><a class="btn btn-danger" href="#">Cancel</a></div>
+                          </div>
+                        </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Container-fluid Ends-->
+          </div>
+          <!-- footer start-->
+          <footer class="footer">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-12 footer-copyright text-center">
+                  <p class="mb-0">Copyright 2021 © Cuba theme by pixelstrap </p>
+                </div>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+
+    </div>
+    <!-- latest jquery-->
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <!-- Bootstrap js-->
+    <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+    <!-- feather icon js-->
+    <script src="{% static 'js/icons/feather-icon/feather.min.js' %}"></script>
+    <script src="{% static 'js/icons/feather-icon/feather-icon.js' %}"></script>
+    <!-- scrollbar js-->
+    <script src="{% static 'js/scrollbar/simplebar.js' %}"></script>
+    <script src="{% static 'js/scrollbar/custom.js' %}"></script>
+    <!-- Sidebar jquery-->
+    <script src="{% static 'js/config.js' %}"></script>
+    <!-- Plugins JS start-->
+    <script src="{% static 'js/sidebar-menu.js' %}"></script>
+    <script src="{% static 'js/datepicker/date-picker/datepicker.js' %}"></script>
+    <script src="{% static 'js/datepicker/date-picker/datepicker.en.js' %}"></script>
+    <script src="{% static 'js/datepicker/date-picker/datepicker.custom.js' %}"></script>
+    <script src="{% static 'js/dropzone/dropzone.js' %}"></script>
+    <script src="{% static 'js/dropzone/dropzone-script.js' %}"></script>
+    <script src="{% static 'js/typeahead/handlebars.js' %}"></script>
+    <script src="{% static 'js/typeahead/typeahead.bundle.js' %}"></script>
+    <script src="{% static 'js/typeahead/typeahead.custom.js' %}"></script>
+    <script src="{% static 'js/typeahead-search/handlebars.js' %}"></script>
+    <script src="{% static 'js/typeahead-search/typeahead-custom.js' %}"></script>
+    <script src="{% static 'js/tooltip-init.js' %}"></script>
+    <script src="script.js"></script>
+    <!-- Plugins JS Ends-->
+    <!-- Theme js-->
+    <script src="{% static 'js/script.js' %}"></script>
+
+    <script type="text/javascript" charset="utf-8">
+  const questionBoxes = document.querySelectorAll('.question-box')
+const nextBtn = document.querySelector('.next')
+const radioButtons = Array.from(document.querySelectorAll('.answer'))
+const scoreDisplay = document.querySelector('.score')
+const scoreDiv = document.querySelector('.result')
+const messageDiv = document.querySelector('.message')
+const displayAnswersBtn = document.querySelector('.show-answers')
+const redoQuizBtn = document.querySelector('.try-again')
+const numberOfQuestions = questionBoxes.length
+let userScore = 0
+
+// next question button
+document.addEventListener("click", e => {
+    if (!e.target.matches('.next')) return
+
+    const currentQuestion = e.target.closest('.question-box')
+    currentQuestion.classList.add('hide')
+    const nextQuestion = currentQuestion.nextElementSibling
+
+    if (nextQuestion.classList.contains('question-box')) {
+        nextQuestion.classList.remove('hide')    
+    } else {
+        scoreDisplay.classList.remove('hide')
+        score()
+    }
+})
+
+// previous question button
+document.addEventListener("click", e => {
+    if (!e.target.matches('.prev')) return
+
+    const currentQuestion = e.target.closest('.question-box')
+    currentQuestion.classList.add('hide')
+    const previousQuestion = currentQuestion.previousElementSibling
+    previousQuestion.classList.remove('hide')
+})
+
+// show answers button
+displayAnswersBtn.addEventListener("click", () => {
+    questionBoxes.forEach(question => {
+        question.classList.remove('hide')
+        question.querySelector('.nav-buttons').classList.add("hide")
+        const radioButtons = Array.from(question.querySelectorAll('.answer'))
+        const correctAnswer = radioButtons.find(button => button.value === "true")
+        
+        if (correctAnswer.checked) {
+        question.classList.add('correct')
+        userScore ++
+        } else question.classList.add('incorrect') 
+    })    
+})
+
+// try again button
+redoQuizBtn.addEventListener("click", () => {
+    const selected = radioButtons.filter(btn => btn.checked)
+    selected.forEach(button => {
+        button.checked = false
+    })
+    questionBoxes.forEach(question => {
+        question.classList.remove('correct')
+        question.classList.remove('incorrect')
+        question.classList.add('hide')
+        scoreDisplay.classList.add('hide')
+        question.querySelector('.nav-buttons').classList.remove("hide")
+    })
+    questionBoxes[0].classList.remove('hide')
+    userScore = 0
+}) 
+
+// calculate score
+function score() {
+    const selected = radioButtons.filter(btn => btn.checked)
+    selected.forEach(button => {
+        if (button.value === "true") userScore ++
+    })
+
+    scoreDiv.innerText = `Score: ${userScore.toString()}/${numberOfQuestions.toString()}`
+    
+    let message = ""
+    if (userScore === 3) {
+        message = "Congratulations! You got them all correct"
+    } else if (userScore === 2) {
+        message = "Great work!"
+    } else message = "Try Again"
+    messageDiv.innerText = message
+}
+
+      </script>
+
+    <!-- login js-->
+    <!-- Plugin used-->
+
+</body>
+
+<!-- Mirrored from admin.pixelstrap.com/cuba/theme/projectcreate.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Apr 2021 09:13:02 GMT -->
+
+</html>

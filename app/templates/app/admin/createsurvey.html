@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html lang="en">
+  
+<!-- Mirrored from admin.pixelstrap.com/cuba/theme/projectcreate.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Apr 2021 09:13:01 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="pixelstrap">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <title>Mystery Shopper</title>
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
+    <!-- ico-font-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/icofont.css' %}">
+    <!-- Themify icon-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/themify.css' %}">
+    <!-- Flag icon-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/flag-icon.css' %}">
+    <!-- Feather icon-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/feather-icon.css' %}">
+    <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/scrollbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/date-picker.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/dropzone.css' %}">
+    <!-- Plugins css Ends-->
+    <!-- Bootstrap css-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/bootstrap.css' %}">
+    <!-- App css-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link id="color" rel="stylesheet" href="{% static 'css/color-1.css" media="screen' %}">
+    <!-- Responsive css-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+<style>
+  .quiz,
+.choices {
+  list-style-type: none;
+  padding: 0;
+}
+
+.choices li {
+  margin-bottom: 5px;
+}
+
+.choices label {
+  display: flex;
+  align-items: center;
+}
+
+.choices label,
+input[type="radio"] {
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  margin-right: 8px;
+}
+
+.view-results {
+  padding: 1rem;
+  cursor: pointer;
+  font-size: inherit;
+  color: white;
+  background: teal;
+  border-radius: 8px;
+  margin-right: 5px;
+}
+
+.my-results {
+  padding: 1rem;
+  border: 1px solid goldenrod;
+}
+
+.imagePreview {
+    width: 100%;
+    height: 400px;
+    background-position: center center;
+  background:url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
+  background-color:#fff;
+    background-size: cover;
+  background-repeat:no-repeat;
+    display: inline-block;
+  box-shadow:0px -3px 6px 2px rgba(0,0,0,0.2);
+}
+.btn-primary
+{
+  display:block;
+  border-radius:0px;
+  box-shadow:0px 4px 6px 2px rgba(0,0,0,0.2);
+  margin-top:-5px;
+}
+.imgUp1sss
+{
+  margin-bottom:15px;
+}
+.del
+{
+  position:absolute;
+  top:0px;
+  right:15px;
+  width:30px;
+  height:30px;
+  text-align:center;
+  line-height:30px;
+  background-color:rgba(255,255,255,0.6);
+  cursor:pointer;
+}
+.imgAdd1
+{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background-color:#4bd7ef;
+  color:#fff;
+  box-shadow:0px 0px 2px 1px rgba(0,0,0,0.2);
+  text-align:center;
+  line-height:30px;
+  margin-top:0px;
+  cursor:pointer;
+  font-size:15px;
+}</style>
+  </head>
+  <body>
+    <!-- tap on top starts-->
+    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
+    <!-- tap on tap ends-->
+    <!-- page-wrapper Start-->
+    <div class="page-wrapper default-wrapper" id="pageWrapper">
+      <!-- Page Header Start-->
+     <div class="page-header">
+        <div class="header-wrapper row m-0">
+       
+          <div class="header-logo-wrapper col-auto p-0">
+            <div class="logo-wrapper"><a href="index.html"><img class="img-fluid" src="{% static 'images/logo/logo.png' %}" alt=""></a></div>
+            <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i></div>
+          </div>
+          <div class="left-header col horizontal-wrapper ps-0">
+            <ul class="horizontal-menu">
+             
+              <li class="level-menu outside"><a class="nav-link" href="#!"><i data-feather="inbox"></i><span>Users</span></a>
+                <ul class="header-level-menu menu-to-be-close">
+                  <li><a href="{% url 'client_register' %}" data-original-title="" title=""> <i data-feather="git-pull-request"></i><span>Clients</span></a></li>
+                  <li><a href="{% url 'surveyor_register' %}" data-original-title="" title=""><i data-feather="users"></i><span>Surveyors</span></a>
+                    
+                  </li>
+               
+                </ul>
+              </li>
+               <li class="mega-menu outside"><a class="nav-link" href="{% url 'requestservey' %}"><i data-feather="layers"></i><span>Request Survey</span></a>
+               
+              </li>
+                <li class="mega-menu outside"><a class="nav-link" href="{% url 'list' %}"><i data-feather="inbox"></i><span> Complete Survey</span></a>
+           
+              </li>
+            </ul>
+          </div>
+          <div class="nav-right col-4 pull-right right-header p-0">
+            <ul class="nav-menus">
+  
+              <li class="profile-nav onhover-dropdown p-0 me-0">
+                <div class="media profile-media"><img class="b-r-10" src="{% static 'images/dashboard/profile.jpg' %}"
+                  alt=""><h6 class="user">{{request.user}}</h6>
+                  <!-- <li> <span class="hello-msg">Welcome, ({{request.user}})</span>
+                    <span ><a  class="hello-msg" href="{% url 'logout' %}">Logout</a></span></li> -->
+                  <ul class="profile-dropdown onhover-show-div">
+                   
+                   <li><a href="{% url 'logout' %}"><i data-feather="log-in"> </i><span>logout</span></a></li>
+                  </ul>
+                </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+       
+        </div>
+      </div>
+      <!-- Page Header Ends                              -->
+      <!-- Page Body Start-->
+      <div class="page-body-wrapper default-menu default-menu">
+        <!-- Page Sidebar Start-->
+       
+        <!-- Page Sidebar Ends-->
+        <div class="page-body">
+		
+          <div class="container-fluid">
+            <div class="page-title">
+              <div class="row">
+                <div class="col-6">
+                  <h3>
+                     Send Survey Request to Surveyors</h3>
+                </div>
+                <div class="col-6">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">                                       <i data-feather="home"></i></a></li>
+                    <li class="breadcrumb-item">Apps</li>
+                    <li class="breadcrumb-item active">Project Create                           </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Container-fluid starts-->
+          <div class="container-fluid">
+		      <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="card">
+                  <div class="card-body">
+                    <form class="form theme-form" method="get">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="form-label" for="validationDefault01" name="question1">Enter Project Name</label>
+                          <input class="form-control" id="validationDefault01" type="text" placeholder="Enter Project Name"
+                            name="project_name" value="{{display.project_name}}" />
+                            </div>
+                        <div class="col-md-8">
+                          <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <input class="form-control"  name="address" type="text" placeholder=" Address" data-bs-original-title="" title="" value="{{display.address}}">
+                          </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                          <div class="mb-3">
+                            <label class="form-label">City</label>
+                            <input class="form-control" type="text" placeholder="City" data-bs-original-title="" title=""name="city" value="{{display.city}}">
+                          </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                          <div class="mb-3">
+                            <label class="form-label">Postal Code</label>
+                            <input class="form-control" type="number" placeholder="ZIP Code" data-bs-original-title="" title=""name="zip_code" value="{{display.zip_code}}">
+                          </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                          <div class="mb-3">
+                            <label class="form-label">Mobile No</label>
+                            <input class="form-control" type="number" placeholder="Mobile No" data-bs-original-title="" title=""name="mobile" value="{{display.mobile}}">
+                          </div>
+                        </div>
+                        
+                        </div>
+                      <div class="row">
+                        <h6>MCQ Question</h6>
+                       
+                        <hr>
+                       
+                        <div class="col-md-5">
+                        
+                          <div>
+                            <ul class="quiz">
+                            {% for i in display.display.all %}
+                          <li>
+                            <p>Q)  {{i.question}} ?</p>
+                            <ul class="choices">
+                              <li><label><input type="radio" name="question0" value="A"><span>{{i.option1}}</span></label></li>
+                              <li><label><input type="radio" name="question0" value="B"><span>{{i.option2}}</span></label></li>
+                              <li><label><input type="radio" name="question0" value="C"><span>{{i.option3}}</span></label></li>
+                              <li><label><input type="radio" name="question0" value="D"><span>{{i.option4}}</span></label></li>
+                            </ul>
+                          </li>
+                          {% endfor %}
+                          
+                          
+                        </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                        <br>
+                        <div class="row g-3 imgUp">
+                        
+                        
+                       
+                          <div class="col-md-3">
+                            <div class="media mb-2">
+                              <label class="col-form-label m-r-10">Enter Description ?</label>
+                              <div class="media-body text-end">
+                                <label class="switch">
+                                  <div class="mb-3">
+                                   
+                                    <select class="form-control btn-square" name="surveyor_name">
+                                      <option value="{{i.fname}} {{i.lname}}">{{display.description_req}}</option>
+                                     
+                                    </select>
+                                  </div></label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row g-3 imgUp">
+                          <div class="col-md-3">
+                            <div class="media mb-2">
+                              <label class="col-form-label m-r-10">Upload Images & Description ?</label>
+                              <div class="media-body text-end">
+                                <label class="switch">
+                                  <div class="mb-3">
+                                    <select class="form-control btn-square" name="surveyor_name">
+                                      <option value="{{i.fname}} {{i.lname}}">{{display.image_req}}</option>
+                                     
+                                      
+                                      
+                                    </select>
+                                  </div>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+  
+                        <div class="row g-3 imgUp">
+                          <div class="col-md-3">
+                            <div class="media mb-2">
+                              <label class="col-form-label m-r-10">Upload Videos/Audio ?</label>
+                              <div class="media-body text-end">
+                                <label class="switch">
+                                  <div class="mb-3">
+                                    <select class="form-control btn-square" name="surveyor_name">
+                                      <option value="{{i.fname}} {{i.lname}}">{{display.audio_req}}</option>
+                                     
+                          
+                                      
+                                      
+                                    </select>
+                                  </div>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                 
+                      <br>
+                       <div class="row">
+                         <h5>Select Surveyors</h5>
+                          <br>
+                        <div class="col-md-12">
+                         <div class="mb-3">
+                            <label class="form-label">Surveyors</label>
+                            
+                            <select class="form-control btn-square" name="surveyor_name">
+                              
+                              <option value="0">--Select--</option>
+                              {% for i in  surveyor_list %}
+                             
+                              <option value="{{ i.id }} " name="surveyor_name"><span><span>{{i.user.first_name}} {{i.user.last_name}},</span></span><span>  <span>{{i.designation}}</span></span>
+                              </option>
+                          
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                      <br>
+                      <div class="row">
+
+                        <div class="col">
+                          <button class="btn btn-secondary" id="Bookmark" onclick="submitBookMark()" type="submit">Send</button>
+                          
+                      </div>
+                    </form>
+                 
+                </div>
+             
+              </div>
+            
+          <!-- Container-fluid Ends-->
+         
+           </form>
+        </div>
+        <!-- footer start-->
+      
+      </div>
+    </div>
+    
+     <footer class="bg-light text-center text-lg-start">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.5);">
+   
+   
+    <a class="text-dark" href="#">Copyright 2021 © U-Survey
+      A product of Connexial Fintech Pvt Ltd</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+      </div>
+    </div>
+    <!-- latest jquery-->
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <!-- Bootstrap js-->
+    <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+    <!-- feather icon js-->
+    <script src="{% static 'js/icons/feather-icon/feather.min.js' %}"></script>
+    <script src="{% static 'js/icons/feather-icon/feather-icon.js' %}"></script>
+    <!-- scrollbar js-->
+    <script src="{% static 'js/scrollbar/simplebar.js' %}"></script>
+    <script src="{% static 'js/scrollbar/custom.js' %}"></script>
+    <!-- Sidebar jquery-->
+    <script src="{% static 'js/config.js' %}"></script>
+    <!-- Plugins JS start-->
+    <script src="{% static 'js/sidebar-menu.js' %}"></script>
+    <script src="{% static 'js/datepicker/date-picker/datepicker.js' %}"></script>
+    <script src="{% static 'js/datepicker/date-picker/datepicker.en.js' %}"></script>
+    <script src="{% static 'js/datepicker/date-picker/datepicker.custom.js' %}"></script>
+    <script src="{% static 'js/dropzone/dropzone.js' %}"></script>
+    <script src="{% static 'js/dropzone/dropzone-script.js' %}"></script>
+    <script src="{% static 'js/typeahead/handlebars.js' %}"></script>
+    <script src="{% static 'js/typeahead/typeahead.bundle.js' %}"></script>
+    <script src="{% static 'js/typeahead/typeahead.custom.js' %}"></script>
+    <script src="{% static 'js/typeahead-search/handlebars.js' %}"></script>
+    <script src="{% static 'js/typeahead-search/typeahead-custom.js' %}"></script>
+    <script src="{% static 'js/tooltip-init.js' %}"></script>
+    <!-- Plugins JS Ends-->
+    <!-- Theme js-->
+    <script src="{% static 'js/script.js' %}"></script>
+  
+    <!-- login js-->
+    <!-- Plugin used-->
+   
+  </body>
+
+<!-- Mirrored from admin.pixelstrap.com/cuba/theme/projectcreate.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Apr 2021 09:13:02 GMT -->
+</html>
