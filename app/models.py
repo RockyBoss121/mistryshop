@@ -33,8 +33,7 @@ class Surveyor(models.Model):
         return self
     def __str__(self):
         return self.user.first_name
-
-    
+ 
 class UserOTP(models.Model):
 	userotp = models.ForeignKey(User, on_delete = models.CASCADE)
 	time_st = models.DateTimeField(auto_now = True)
@@ -45,47 +44,6 @@ def upload_profile_to(instance,filename):
 
 def upload_cover_to(instance,filename):
 	return f'coverImage/{instance.user.username}/{filename}'
-
-# class Profile(models.Model):
-# 	gen = (('Male', 'Male'), ('Female', 'Female'), ('Other', 'Other'))
-# 	user = models.OneToOneField(User, on_delete = models.CASCADE)
-# 	about_me = models.CharField(max_length=250, null=True)
-# 	birthday = models.DateField(null=True)
-# 	profile_pic = models.ImageField(upload_to = upload_profile_to, null=True, default = 'defaults/profile_pic.jpg')
-# 	cover_image = models.ImageField(upload_to = upload_cover_to, null = True, default= 'defaults/cover_image.jpg')
-# 	gender = models.CharField(choices=gen, max_length=6, null=True)
-# 	followers = models.ManyToManyField(User, related_name='followers', blank=True)
-# 	following = models.ManyToManyField(User, related_name="following", blank=True)
-
-# 	def __str__(self):
-# 		return self.user.username
-
-# 	def save(self, *args, **kwargs):
-# 		super().save(*args, **kwargs)
-
-# 		img = Image.open(self.profile_pic.path)
-# 		if img.height > 300 or img.width > 300:
-# 			output_size = (300, 300)
-# 			img.thumbnail(output_size)
-# 			img.save(self.profile_pic.path)
-
-# 		img2 = Image.open(self.cover_image.path)
-# 		if img2.height > 500 or img2.width > 500:
-# 			output_size = (500, 500)
-# 			img2.thumbnail(output_size)
-# 			img2.save(self.cover_image.path)
-
-# 	def non_followed_user(self):
-# 		return set(User.objects.filter(is_active=True))-set(self.following.all())-{self.user}
-
-# 	def get_notifications(self):
-# 		return Notification.objects.filter(user=self.user, seen = False)
-
-# class Notification(models.Model):
-# 	user = models.ForeignKey(User, on_delete=models.CASCADE)
-# 	message = models.CharField(max_length=500)
-# 	link = models.CharField(max_length=500)
-# 	seen = models.BooleanField(default=False)
 
 class CreateSurvey(models.Model):
    survey_name = models.CharField(max_length=50)
@@ -104,8 +62,11 @@ class ProjectName(models.Model):
     zip_code=models.CharField(max_length=20,null=True, blank=True)
     mobile=models.IntegerField(null=True, blank=True)
     description_req=models.CharField(max_length=20,null=True, blank=True)
+    enter_description=models.TextField(null=True, blank=True)
     image_req=models.CharField(max_length=20,null=True, blank=True)
+    upload_image_des=models.TextField(null=True, blank=True)
     audio_req=models.CharField(max_length=20,null=True, blank=True)
+    upload_video_des=models.TextField(null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     is_send = models.BooleanField(default=False)
     def __str__(self):
@@ -141,7 +102,8 @@ class AllImage(models.Model):
         return str(self.image)
 
 class ImageDescription(models.Model):
-    img=models.OneToOneField(AllImage,on_delete = models.CASCADE,related_name="img",null=True,blank=True)
+    img_name=models.ForeignKey(ProjectName,on_delete=models.CASCADE,related_name="img_name",null=True, blank=True)
+    img=models.OneToOneField(AllImage,on_delete = models.CASCADE,related_name="img",null=True, blank=True)
     description=models.TextField(null=True, blank=True)
     def __str__(self):
         return str(self.description)

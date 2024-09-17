@@ -1,49 +1,48 @@
 from django.shortcuts import render , redirect
 from django.contrib.auth.models import User
-from django.contrib import messages
 import random
 from .models import *
 from .forms import LoginForm
-from django.core.mail import send_mail
+from django.core.mail import BadHeaderError, send_mail
+from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.http import HttpResponse, Http404, JsonResponse,HttpResponseRedirect
-from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
-from django.contrib.auth import authenticate, login
+
 from django.views.decorators.csrf import csrf_exempt
-from django.core import serializers
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from . import forms
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import ListView
 from django.contrib.auth import authenticate, login, logout
-from django.forms.utils import ErrorList
-from django.views.generic import CreateView
-from django.contrib.auth.forms import AuthenticationForm
-
+from django.contrib import messages
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 def home_view(request): 
-    return render(request,'quiz/index.html')
+    return render(request,'index.html')
+
+def aboutus(request): 
+    return render(request,'about-us.html')
+
 
 def adminclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
-    return render(request,'quiz/index.html')
+    return render(request,'index.html')
 
 
 #for showing signup/login button for client
 def clientclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
-    return render(request,'quiz/index.html')
+    return render(request,'index.html')
 
 
 #for showing signup/login button for surveyor
 def surveyorclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
-    return render(request,'quiz/index.html')
+    return render(request,'index.html')
 
 
 def admin_signup_view(request):
@@ -56,7 +55,7 @@ def admin_signup_view(request):
             user.save()
             my_admin_group = Group.objects.get_or_create(name='ADMIN')
             my_admin_group[0].user_set.add(user)
-            return HttpResponseRedirect('/adminlogin/')
+            return HttpResponseRedirect('/')
     return render(request,'accounts/register.html')
 
 def client_register(request):
@@ -75,7 +74,7 @@ def client_register(request):
             client.save()
             my_client_group = Group.objects.get_or_create(name='CLIENT')
             my_client_group[0].user_set.add(user)
-        return HttpResponseRedirect('/clientlogin/')
+        return HttpResponseRedirect('/')
     return render(request,'client/register.html',context=mydict)
 
 def surveyor_register(request):
@@ -94,7 +93,7 @@ def surveyor_register(request):
             surveyor.save()
             my_surveyor_group = Group.objects.get_or_create(name='SURVEYOR')
             my_surveyor_group[0].user_set.add(user)
-        return HttpResponseRedirect('/surveyorlogin/')
+        return HttpResponseRedirect('/')
     return render(request,'surveyor/register.html',context=mydict)
 
 def is_admin(user):
@@ -114,13 +113,14 @@ def afterlogin_view(request):
     else:
         return redirect('home')
 
-@login_required(login_url='adminlogin')
+# @login_required(login_url='adminlogin')
+# @user_passes_test(is_admin)
 def home(request):
 	clist=Client.objects.all()
 	return render(request, 'admin/admin.html',{'clist':clist})
 
 
-@login_required(login_url="adminlogin")  
+# @login_required(login_url="adminlogin")  
 def createprofile(request,project_id):
 	releted_data=ProjectName.objects.get(id=project_id)	
 	surveyor_list=Surveyor.objects.all()
@@ -134,44 +134,44 @@ def createprofile(request,project_id):
 		releted_data.save()
 	return render(request, 'admin/createsurvey.html',{'display':releted_data,'surveyor_list':surveyor_list})
 
-@login_required(login_url='adminlogin')   
+# @login_required(login_url='adminlogin')   
 def editprofile(request):
     return render(request, 'admin/edit-profile.html')
 
-@login_required(login_url="adminlogin")	
+# @login_required(login_url="adminlogin")	
 def listprofile(request):
 	project_list= ProjectName.objects.filter(display__ques__isnull=False).distinct()
+	print(project_list)
 	return render(request, 'admin/list-products.html', {'project_list': project_list})
 
-
-@login_required(login_url="adminlogin")   
+# @login_required(login_url="adminlogin")   
 def task(request):
     return render(request, 'admin/task.html')
 
-@login_required(login_url='adminlogin')
+# @login_required(login_url='adminlogin')
 def completesyrvey(request):
 	clt=Client.objects.all()
 	return render(request,'admin/Completesurvey.html',{'clt':clt})
 
-@login_required(login_url='adminlogin')
+# @login_required(login_url='adminlogin')
 def comsur(request):
 	clt=ProjectName.objects.all()
 	return render(request,'admin/Requestservey.html',{'clt':clt})
 
-@login_required(login_url='adminlogin')
+# @login_required(login_url='adminlogin')
 def complete_survey_view(request,project_id):
 	project = ProjectName.objects.filter(id=project_id)
 	return render(request,'admin/user-profile.html',{'project':project})
 
-################################### client views ####################################################################
+################################### client views ########################################################
 
-@login_required(login_url='clientlogin')
-@user_passes_test(is_client)
+# @login_required(login_url='clientlogin')
+# @user_passes_test(is_client)
 def client(request):
     return render(request, 'client/client.html')
 
-@login_required(login_url='clientlogin')
-@user_passes_test(is_client)
+# @login_required(login_url='clientlogin')
+# @user_passes_test(is_client)
 def ccreate(request):
 	current_user=request.user.client.id
 	if request.method == 'POST':
@@ -181,11 +181,15 @@ def ccreate(request):
 		zip_code=request.POST['zip_code']
 		mobile=request.POST['mobile']
 		description_req=request.POST['check1']
+		enter_description=request.POST['enter_description']
 		image_req=request.POST['check2']
+		upload_image_des=request.POST['upload_image_des']
 		audio_req=request.POST['check3']
+		upload_video_des=request.POST['upload_video_des']
 		
-		newpost=ProjectName(client_id=current_user,project_name=project_name,address=address,city=city,zip_code=zip_code,mobile=mobile,description_req=description_req,
-		image_req=image_req,audio_req=audio_req)
+		newpost=ProjectName(client_id=current_user,project_name=project_name,address=address,city=city,zip_code=zip_code,
+		mobile=mobile,description_req=description_req,enter_description=enter_description,image_req=image_req,
+		upload_image_des=upload_image_des,audio_req=audio_req,upload_video_des=upload_video_des)
 		newpost.save()
 		a=ProjectName.objects.all().last()
 		b=ProjectName.objects.get(id=a.id)
@@ -207,15 +211,16 @@ def ccreate(request):
 			newpost=ClientQuestion(project=b,question=i,option1=option1[j],option2=option2[j],option3=option3[j],option4=option4[j])
 			newpost.save()
 			j +=1	
+		messages.success(request, 'Your Project is Created Successfully !')
 	return render(request,'client/projectcreate.html')
 
-@login_required(login_url='clientlogin')
-@user_passes_test(is_client)   
+# @login_required(login_url='clientlogin')
+# @user_passes_test(is_client)   
 def cedit(request):
     return render(request, 'client/edit-profile.html')
 
-@login_required(login_url='clientlogin')
-@user_passes_test(is_client)	
+# @login_required(login_url='clientlogin')
+# @user_passes_test(is_client)	
 def clist(request):
 	user_id = request.user.id
 	project    = ProjectName.objects.filter(client__user_id=user_id,is_send=True)
@@ -227,31 +232,31 @@ def clientallocate(request,id):
 	ProjectName.objects.filter(id=id).update(is_send=True)
 	return HttpResponseRedirect("/list/")
 
-@login_required(login_url='clientlogin')
-@user_passes_test(is_client)	
+# @login_required(login_url='clientlogin')
+# @user_passes_test(is_client)	
 def ctask(request):
     return render(request, 'client/task.html')
 
-@login_required(login_url='clientlogin')
-@user_passes_test(is_client)
+# @login_required(login_url='clientlogin')
+# @user_passes_test(is_client)
 def userprofile(request):
 	return render(request, 'client/user-profile.html')
 
-@login_required(login_url='clientlogin')
-@user_passes_test(is_client)
+# @login_required(login_url='clientlogin')
+# @user_passes_test(is_client)
 def userabc(request,project_id):
 	project = ProjectName.objects.filter(id=project_id)
 	return render(request,'client/user-profile.html',{'project':project})
 
 ########################## surveyor views ##############################################################
 
-@login_required(login_url='surveyorlogin')
-@user_passes_test(is_surveyor)
+# @login_required(login_url='surveyorlogin')
+# @user_passes_test(is_surveyor)
 def surveyor(request):
-	return render(request, 'surveyor/survy.html',{'clist':clist})
+	return render(request, 'surveyor/survy.html')
 
-@login_required(login_url='surveyorlogin')
-@user_passes_test(is_surveyor)
+# @login_required(login_url='surveyorlogin')
+# @user_passes_test(is_surveyor)
 def listq(request,project_id):
 	# project_list = ProjectName.objects.filter(surveyor_id__in=surveyor_ids)
 	releted_data=ProjectName.objects.get(id=project_id)
@@ -265,11 +270,10 @@ def listq(request,project_id):
 		releted_data=ClientQuestion.objects.filter(project_id=project_id)
 
 		answer_list=[]
+		
 		description=request.POST.get("description")
 		a=SurveyDescription.objects.create(project_des_id=project_id,description=description)
 		for i in releted_data:
-			# print(i.project_id)
-			# que=exec(f'ques_{i.id}')
 			ans=request.POST.get(f'{i.id}')
 			# answer_list.append(Answer(ques_id=i.id,answer=ans))
 			Answer.objects.update_or_create(ques_id=i.id,defaults={'answer':ans})
@@ -279,13 +283,20 @@ def listq(request,project_id):
 	    
 		img_uplod=request.FILES.getlist("image")
 		for i in img_uplod:
-			a=AllImage(image=i,proj_name_id=abc)
-			a.save()
+			# a=AllImage(image=i,proj_name_id=abc)
+			# a.save()
+			AllImage.objects.update_or_create(image=i,proj_name_id=abc)
 			
-		image_description=request.POST.getlist("image_description")
+
+		# all_image=AllImage.objects.filter(proj_name_id=project_id)
+		image_description=request.POST.getlist("image_description")	
+		z=len(image_description)
 		for i in image_description:
-			a=ImageDescription(description=i)
-			a.save()
+			b=AllImage.objects.all().last()
+			c = (b.id-z)+1
+			ImageDescription.objects.update_or_create(img_name_id=releted_data.id, description=i, img_id=c)
+			z -=1
+			
 		video=request.FILES.getlist("Videos")
 		for i in video:
 			a=AllVideo(video=i,projec_name_id=abc)
@@ -293,15 +304,15 @@ def listq(request,project_id):
 		
 	return render(request,'surveyor/projectcreate.html',{'display':releted_data})
 
-@login_required(login_url='surveyorlogin')
-@user_passes_test(is_surveyor)
+# @login_required(login_url='surveyorlogin')
+# @user_passes_test(is_surveyor)
 def allsurvey(request):
 	user_id = request.user.id
 	project_list= ProjectName.objects.filter(display__ques__isnull=False, surveyor__user_id =user_id).distinct()
 	return render(request,'surveyor/list-products.html',{'project_list':project_list})
 
-@login_required(login_url='surveyorlogin')
-@user_passes_test(is_surveyor)
+# @login_required(login_url='surveyorlogin')
+# @user_passes_test(is_surveyor)
 def surveylist(request):
 	# import pdb
 	# pdb.set_trace()
@@ -312,8 +323,8 @@ def surveylist(request):
 	context = {'project_list': project_list}
 	return render(request,'surveyor/Requestsarvey.html',context)
 
-@login_required(login_url='surveyorlogin')
-@user_passes_test(is_surveyor)
+# @login_required(login_url='surveyorlogin')
+# @user_passes_test(is_surveyor)
 def complete_view(request,project_id):
 	project = ProjectName.objects.filter(id=project_id)
 	return render(request,'surveyor/user-profile.html',{'project':project})
@@ -323,27 +334,48 @@ def quiz(request):
 
 
 
-def login_view(request):
-    form = LoginForm(request.POST or None)
+# def login_view(request):
+#     # form = LoginForm(request.POST or None)
 
-    msg = None
+#     # msg = None
 
-    if request.method == "POST":
+#     if request.method == "POST":
+# 		username= request.POST.get("username")
+# 		password=request.POST.get("password")
 
-        if form.is_valid():
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
+#         # if form.is_valid():
+# 		username = form.cleaned_data.get("username")
+# 		password = form.cleaned_data.get("password")
             
-            user = authenticate(request,username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect("afterlogin")
-            else:    
-                msg = 'Invalid credentials'    
-        else:
-            msg = 'Error validating the form'    
+# 		user = authenticate(request,username=username, password=password)
+# 		if user is not None:
+# 			login(request, user)
+# 			return redirect("afterlogin")
+# 		else:    
+# 			msg = 'Invalid credentials'    
+# 	else:
+# 		msg = 'Error validating the form'    
 
-    return render(request, "accounts/login.html", {"form": form, "msg" : msg})
+#     return render(request, "accounts/login.html", {"form": form, "msg" : msg})
+def login_view(request):
+	if request.method=="POST":
+		username= request.POST.get("username")
+		password=request.POST.get("password")
+		
+		try:
+			user = authenticate(request,username=username, password=password)
+			if user is not None:
+				login(request, user)
+				return redirect("afterlogin")
+			else:
+				msg = 'Invalid credentials'
+		except Exception as identifier:
+			return redirect('/')
+
+	else:
+		msg = 'Error validating the form'
+	return render(request, "login-page.html", {"msg" : msg})
+	
 
 # def register_user(request):
 # 	if request.method == 'POST':
@@ -584,6 +616,54 @@ def clientquestion(request):
 	
 	return render(request, 'clientquestion.html', {'ques':ques})
 
+# def error_404(request,exception):
+# 	return render(request,'404-error.html')
 
+def contactus(request):
+	if request.method == 'POST':
+		first_name = request.POST['first']
+		last_name = request.POST['lastname']
+		email = request.POST['email']
+		phone = request.POST['phone']
+		message = request.POST['message']
+		msg=f'{message}\n {first_name}\n {last_name}\n {email}\n {phone}.'
+		send_mail('Contact Form',msg,email,
+		['info@usurvey.in','usurveydigitally@gmail.com'], 
+		fail_silently=False)
+	return render(request, 'contact-us.html')
+	
+def pdf_report_create(request,project_id):
+    project = ProjectName.objects.filter(id=project_id)
+	
+    template_path = 'client/pdfReport.html'
 
+    context = {'project': project}
 
+    response = HttpResponse(content_type='application/pdf')
+
+    response['Content-Disposition'] = 'filename="Survey_report.pdf"'
+
+    template = get_template(template_path)
+
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    # if error then show some funy view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
+            
+        
+            
+        
+	
+    
+    
+    
+        
+    
+        
+        

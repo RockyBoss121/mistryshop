@@ -40,6 +40,7 @@
   <link id="color" rel="stylesheet" href="{% static 'css/color-1.css' %}" media="screen" />
   <!-- Responsive css-->
   <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}" />
+
 </head>
 
 <body>
@@ -61,13 +62,15 @@
         </div>
         <div class="left-header col-8 horizontal-wrapper ps-0">
           <ul class="horizontal-menu">
-            <li class="mega-menu outside"><a class="nav-link" href="{% url 'ccreate' %}"><i data-feather="layers"></i><span>Create Survey</span></a>
-             
+            <li class="mega-menu outside"><a class="nav-link" href="{% url 'ccreate' %}"><i
+                  data-feather="layers"></i><span>Create Survey</span></a>
+
             </li>
-            <li class="level-menu outside"><a class="nav-link" href="{% url 'clist' %}"><i data-feather="inbox"></i><span>Survey List</span></a>
-         
+            <li class="level-menu outside"><a class="nav-link" href="{% url 'clist' %}"><i
+                  data-feather="inbox"></i><span>Survey List</span></a>
+
             </li>
-             
+
           </ul>
         </div>
         <div class="nav-right col-4 pull-right right-header p-0">
@@ -75,16 +78,17 @@
 
             <li class="profile-nav onhover-dropdown p-0 me-0">
               <div class="media profile-media"><img class="b-r-10" src="{% static 'images/dashboard/profile.jpg' %}"
-                alt=""><h6 class="user">{{request.user}}</h6>
+                  alt="">
+                <h6 class="user">{{request.user}}</h6>
                 <!-- <li> <span class="hello-msg">Welcome, ({{request.user}})</span>
                   <span ><a  class="hello-msg" href="{% url 'logout' %}">Logout</a></span></li> -->
                 <ul class="profile-dropdown onhover-show-div">
-                 
-                 <li><a href="{% url 'logout' %}"><i data-feather="log-in"> </i><span>logout</span></a></li>
+
+                  <li><a href="{% url 'logout' %}"><i data-feather="log-in"> </i><span>logout</span></a></li>
                 </ul>
-              </li>
-              </ul>
             </li>
+          </ul>
+          </li>
           </ul>
         </div>
       </div>
@@ -125,65 +129,82 @@
                   <div class="card-header">
                     <h5>Add MCQ Question</h5>
                   </div>
-
+                  {% if messages %}
+                  {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+                  {% endfor %}
+                  {% endif %}
 
                   <div class="card-body">
                     {% comment %} <form method="post">
                       {% csrf_token %} {% endcomment %}
                       <div class="row g-3 imgUp">
-                        
-                      
-                     
-                      
-                          <div class="row">
-                            <div class="col-md-4">
-                              <label class="form-label" for="validationDefault01" name="question1">Enter Project Name</label>
-                              <input class="form-control" id="validationDefault01" type="text" placeholder="Enter Project Name"
-                                name="project_name" />
-                                </div>
-                            <div class="col-md-8">
-                              <div class="mb-3">
-                                <label class="form-label">Address</label>
-                                <input class="form-control"  name="address" type="text" placeholder=" Address" data-bs-original-title="" title="">
-                              </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                              <div class="mb-3">
-                                <label class="form-label">City</label>
-                                <input class="form-control" type="text" placeholder="City" data-bs-original-title="" title=""name="city">
-                              </div>
-                            </div>
-                            <div class="col-sm-6 col-md-3">
-                              <div class="mb-3">
-                                <label class="form-label">Postal Code</label>
-                                <input class="form-control" type="number" placeholder="ZIP Code" data-bs-original-title="" title=""name="zip_code">
-                              </div>
-                            </div>
-                            <div class="col-sm-6 col-md-3">
-                              <div class="mb-3">
-                                <label class="form-label">Mobile No</label>
-                                <input class="form-control" type="number" placeholder="Mobile No" data-bs-original-title="" title=""name="mobile">
-                              </div>
-                            </div>
-                            
+
+
+
+
+                        <div class="row">
+                          <div class="col-md-4">
+                            <label class="form-label" for="validationDefault01" name="question1">Enter Project
+                              Name<em>*</em></label>
+                            <input class="form-control" id="validationDefault01" type="text"
+                              placeholder="Enter Project Name" name="project_name" required="" autocomplete="off" />
+                          </div>
+                          <div class="col-md-8">
+                            <div class="mb-3">
+                              <label class="form-label">Address<em>*</em></label>
+                              <input class="form-control" name="address" type="text" placeholder=" Address"
+                                data-bs-original-title="" title="" required="" autocomplete="off">
                             </div>
                           </div>
+                          <div class="col-sm-6 col-md-4">
+                            <div class="mb-3">
+                              <label class="form-label">City<em>*</em></label>
+                              <input class="form-control" type="text" placeholder="City" data-bs-original-title=""
+                                title="" name="city" required="" autocomplete="off">
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <div class="mb-3">
+                              <label class="form-label">Postal Code</label>
+                              <input class="form-control" type="number" placeholder="ZIP Code" data-bs-original-title=""
+                                title="" name="zip_code">
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <div class="mb-3">
+                              <label class="form-label">Mobile No<em>*</em></label>
+                              <input class="form-control" type="number" placeholder="Mobile No"
+                                data-bs-original-title="" title="" name="mobile" required="" autocomplete="off">
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
                       <div class="row g-3 imgUp">
-                        
-                        
-                       
+
+
+
                         <div class="col-md-3">
                           <div class="media mb-2">
                             <label class="col-form-label m-r-10">Enter Description ?</label>
                             <div class="media-body text-end">
                               <label class="switch">
-                                <select name="check1" class="form-control btn-square">
+                                <select name="check1" id="type" class="form-control btn-square" required=""
+                                  data-bs-original-title="" autocomplete="off">
                                   <option value="0">Select</option>
-                                  <option value="Yes">Yes</option>
-                                  <option value="No">No</option>
-                                 
-                                </select>                              </label>
+                                  <option value="Yes" required="" autocomplete="off" name="Yes">Yes</option>
+                                  <option value="No" required="" autocomplete="off">No</option>
+
+                                </select> </label>
                             </div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="mb-3" id="Descr" style="display:none">
+                            <label>Enter Description</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea4" rows="3"
+                              name="enter_description"></textarea>
                           </div>
                         </div>
                       </div>
@@ -193,14 +214,21 @@
                             <label class="col-form-label m-r-10">Upload Images & Description ?</label>
                             <div class="media-body text-end">
                               <label class="switch">
-                                <select name="check2" class="form-control btn-square">
+                                <select name="check2" id="type1" class="form-control btn-square">
                                   <option value="0">Select</option>
-                                  <option value="Yes">Yes</option>
+                                  <option value="Yes" id="yes1">Yes</option>
                                   <option value="No">No</option>
-                                 
+
                                 </select>
                               </label>
                             </div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="mb-3" id="Descr1" style="display:none">
+                            <label>Enter Description</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea4" rows="3"
+                              name="upload_image_des"></textarea>
                           </div>
                         </div>
                       </div>
@@ -211,44 +239,51 @@
                             <label class="col-form-label m-r-10">Upload Videos/Audio ?</label>
                             <div class="media-body text-end">
                               <label class="switch">
-                                
-                                  
-                                  <select name="check3" class="form-control btn-square">
-                                    <option value="0">Select</option>
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                   
-                                  </select>
-                               
-                                
+
+
+                                <select name="check3" class="form-control btn-square" id="type2">
+                                  <option value="0">Select</option>
+                                  <option value="Yes" id="yes2">Yes</option>
+                                  <option value="No">No</option>
+
+                                </select>
+
+
                             </div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="mb-3" id="Descr2" style="display:none">
+                            <label>Enter Description</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea4" rows="3"
+                              name="upload_video_des"></textarea>
                           </div>
                         </div>
                       </div>
                       <br />
-                    <div class="row g-3 imgUp">
+                      <div class="row g-3 imgUp">
 
-                      <div class="col-md-3">
-                        <label class="form-label" for="validationDefault01" name="question1">Enter Question</label>
-                        <input class="form-control" id="validationDefault01" type="text" placeholder="Enter Question"
-                          name="question1" />
+                        <div class="col-md-3">
+                          <label class="form-label" for="validationDefault01" name="question1">Enter Question</label>
+                          <input class="form-control" id="validationDefault01" type="text" placeholder="Enter Question"
+                            name="question1" />
+                        </div>
+                        <div class="col-md-2">
+                          <label class="form-label" for="validationDefault02">Option First</label>
+
+                          <input class="form-control" id="validationDefault02" type="text" placeholder="Option First"
+                            name="opt1" />
+
+                        </div>
+                        <div class="col-md-2">
+                          <label class="form-label" for="validationDefault02">Option Second </label>
+
+                          <input class="form-control" id="validationDefault02" type="text" placeholder="Option Second"
+                            name="opt2" />
+                        </div>
+
+                        <span class="add-qus imgAdd2">+</span>
                       </div>
-                      <div class="col-md-2">
-                        <label class="form-label" for="validationDefault02">Option First</label>
-
-                        <input class="form-control" id="validationDefault02" type="text" placeholder="Option First"
-                          name="opt1" />
-
-                      </div>
-                      <div class="col-md-2">
-                        <label class="form-label" for="validationDefault02">Option Second </label>
-
-                        <input class="form-control" id="validationDefault02" type="text" placeholder="Option Second"
-                          name="opt2" />
-                      </div>
-
-                      <span class="add-qus imgAdd2">+</span>
-                    </div>
 
 
                       <br />
@@ -282,7 +317,7 @@
                         <span class="add-qus imgAdd">+</span>
                       </div>
 
-                      
+
                   </div>
                 </div>
               </div>
@@ -299,7 +334,7 @@
       <footer class="bg-light text-center text-lg-start">
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.5)">
-                
+
           <a class="text-dark" href="#">Copyright 2021 © U-Survey
             A product of Connexial Fintech Pvt Ltd</a>
         </div>
@@ -320,6 +355,8 @@
   <!-- Sidebar jquery-->
   <script src="{% static 'js/config.js' %}"></script>
   <!-- Plugins JS start-->
+  <script src="{% static 'js/form-validation-custom.js' %}"></script>
+  <script src="{% static 'js/bookmark/jquery.validate.min.js' %}"></script>
   <script src="{% static 'js/sidebar-menu.js' %}"></script>
 
   <script src="{% static 'js/todo/todo.js' %}"></script>
@@ -329,7 +366,37 @@
   <!-- Plugins JS Ends-->
   <!-- Theme js-->
   <script src="{% static 'js/script.js' %}"></script>
-  
+
+  <script>
+
+    $('#type').on('change', function () {
+      $('#Descr').css('display', 'none');
+      if ($(this).val() === 'Yes') {
+        $('#Descr').css('display', 'block');
+      }
+    });
+    $('#type1').on('change', function () {
+      $('#Descr1').css('display', 'none');
+      if ($(this).val() === 'Yes') {
+        $('#Descr1').css('display', 'block');
+      }
+    });
+    $('#type2').on('change', function () {
+      $('#Descr2').css('display', 'none');
+      if ($(this).val() === 'Yes') {
+        $('#Descr2').css('display', 'block');
+      }
+    });
+
+  </script>
+
+  <script>
+    setTimeout(function () {
+      if ($('#msg').length > 0) {
+        $('#msg').remove();
+      }
+    }, 2000)
+  </script>
   <!-- login js-->
   <!-- Plugin used-->
 </body>

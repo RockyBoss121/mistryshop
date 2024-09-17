@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <title>Mistry shopper</title>
+</head>
+
+<body>
+  <div class="tap-top"><i data-feather="chevrons-up"></i></div>
+  <div class="page-wrapper compact-wrapper" id="pageWrapper">
+    <div class="page-body-wrapper">
+      <div class="page-body">
+        {% for i in project %}
+        <div class="container-fluid">
+          <div class="user-profile">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="card hovercard text-center">
+                  <div class="cardheader"></div>
+                  {% for i in project %}
+                  <div class="col-sm-6 col-lg-4 order-sm-2 order-xl-2">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Email</th>
+                          <th>Project Name</th>
+                          <th>Surveyor Name</th>
+                          <th>Contact</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{{i.surveyor.user.email}}</td>
+                          <td>{{i.project_name}}</td>
+                          <td>{{i.surveyor.user.first_name}} {{i.surveyor.user.last_name}}</td>
+                          <td>{{i.surveyor.mobile}}</td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                    </table>
+                  </div>
+                  <hr>
+                  {% endfor%}
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="profile-img-style">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div>
+                      <ul class="quiz">
+                        <li>
+                          <ul class="choices">
+                            {% for j in i.display.all %}
+                            <li>Q) {{j.question}}</span></label></li>
+                            <li>Answer= {{j.ques}}</span></li>
+                            {% endfor %}
+                            <br><br><br><br>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="profile-img-style">
+                <hr>
+                <div class="row">
+                  {% for j in i.proj_name.all%}
+                  <div class="col-sm-4">
+                    <div class="card m-2">
+                      <div class="card-footer">
+                        <small class="text-muted"> {{j.img.description}}</small>
+                      </div>
+                      <img src="{{j.image.path}}" height="200px">
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+</body>
+
+</html>

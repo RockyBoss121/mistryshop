@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<style>
+    table, th, td{
+    border:1px solid black;
+     border-spacing:0px;
+}
+
+table{
+    width: 100%;
+    height: auto;
+}
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+   img{
+       width: 100%;
+       height: 50vh;
+   }
+   p{
+       text-align: center;
+   }
+
+</style>
+<body>
+    {% for i in project %}
+    <div class="container">
+        <table class="table">
+       
+              <tr>
+                <th scope="col"><p>Name</p></th>
+                <th scope="col"><p>Email</p></th>
+                <th scope="col"><p>Mobile No</p>
+                </th>
+                <th scope="col"><p>Address</p></th>
+              </tr>
+            
+              {% for i in project %}
+              <tr>
+               
+                <td>{{i.surveyor.user.email}}</td>
+                <td>{{i.project_name}}</td>
+                <td>{{i.surveyor.user.first_name}} {{i.surveyor.user.last_name}}</td>
+                <td>{{i.surveyor.mobile}}</td>
+              </tr>
+              {% endfor %}
+          </table>
+        
+          <div class="card">
+            <div class="profile-img-style">
+              <div class="row">
+                <div class="col-md-6">
+                  <div>
+                    <ul class="quiz">
+                      <li>
+                        <ul class="choices">
+                          {% for j in i.display.all %}
+                          <li>Q) {{j.question}}</span></label></li>
+                          <li>Answer= {{j.ques}}</span></li>
+                          {% endfor %}
+                          <br><br><br><br>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+          <div class="row"> 
+            {% for j in i.proj_name.all%}
+              <div class="col-md-6">
+                  <small class="text-muted"> {{j.img.description}}</small>
+                  <img src="{{j.image.path}}" alt="r">
+              </div>
+              {% endfor %}
+          </div>
+    </div>
+    {% endfor %}
+</body>
+</html>

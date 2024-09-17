@@ -86,7 +86,7 @@
                 </fieldset>
                 <div class="form-grounp">
                   <button class="btn mainbtn" type="submit">Verify</button>
-                  <small class="float-right text-muted"><i><a href="{% url 'adminlogin' %}" class="text-dark"
+                  <small class="float-right text-muted"><i><a href="{% url '' %}" class="text-dark"
                         onclick="ReSendOTP('{{usr.username}}', 'resendOTPmess')"><i id="resendOTPmess">Resend</i>
                         OTP</a></small>
 
@@ -161,7 +161,7 @@
                   </div>
                 </div>
                 <p class="mt-4 mb-0 text-center">
-                  Already have an account?<a class="ms-2" href="{% url 'surveyorlogin' %}">Sign in</a>
+                  Already have an account?<a class="ms-2" href="{% url '' %}">Sign in</a>
                 </p>
               </form>
               {% endif %}

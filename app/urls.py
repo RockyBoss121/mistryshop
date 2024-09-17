@@ -5,7 +5,10 @@ from django.contrib.auth.views import LoginView,LogoutView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('',views.home_view,name=''),
+    path('login',views.login_view,name='login'),
+    path('',views.home_view,name='index'),
+    path('about_us',views.aboutus,name='about_us'),
+    path('contact_us',views.contactus,name='contact_us'),
 
     ############ Admin Related Urls  ###################################################
     path('home/' ,views.home , name="home"),
@@ -34,13 +37,11 @@ urlpatterns = [
     path('register/', views.admin_signup_view, name="adminsignup"),
     path('client_register/',views.client_register, name='client_register'),
     path('surveyor_register/',views.surveyor_register, name='surveyor_register'),
-
-
     path('afterlogin/', views.afterlogin_view,name='afterlogin'),
 
-    path('adminlogin/', views.login_view,name='adminlogin'),
-    path('clientlogin/', views.login_view,name='clientlogin'),
-    path('surveyorlogin/', views.login_view,name='surveyorlogin'),
+    # path('adminlogin/', views.login_view,name='adminlogin'),###when we provide only one url then this 3 line is commennted
+    # path('clientlogin/', views.login_view,name='clientlogin'),
+    # path('surveyorlogin/', views.login_view,name='surveyorlogin'),
 
     ############# Surveyor Related Urls #################################################
     path('surveyor/' , views.surveyor , name="surveyor"),
@@ -70,6 +71,8 @@ urlpatterns = [
         name="password_reset_complete"),
 
     path('resendOTP/',views.resend_otp),
+    path('contactus/',views.contactus),
+    path('create-pdf/<int:project_id>', views.pdf_report_create, name='create-pdf'),
 
    
 ]

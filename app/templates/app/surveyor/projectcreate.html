@@ -171,7 +171,7 @@
                         <div class="mb-3">
                           <label class="form-label">Mobile No</label>
                           <input class="form-control" type="number" placeholder="Mobile No" data-bs-original-title=""
-                            value="{{display.phone_number}} title="">
+                            value="{{display.mobile}}" title="">
                             </div>
                           </div>
                           </div>
@@ -209,10 +209,19 @@
                         </div>
 
                         <br>
+                        
 
                         <h5>Upload Images & Description</h5>
                         <br>
+                        <div class="col-md-12">
+                          <div>
 
+                            <textarea class="form-control" rows="5" placeholder="Enter description"
+                             >{{display.upload_image_des}}</textarea>
+                          </div>
+                        </div>
+                        <br>
+                        <br>
                         <div class="row">
                           <div class="col-sm-4 imgUp">
                             <div class="imagePreview"></div>
@@ -262,6 +271,17 @@
 
                         <div class="row">
                           <h5>Upload Videos/Audio</h5>
+                          <br>
+                          <div class="col-md-12" style="    margin-bottom: 20px;">
+                            <div>
+  
+                              <textarea class="form-control" rows="5" placeholder="Enter description"
+                                name="video_description" value="{{display.upload_image_des}}">{{display.upload_video_des}}</textarea>
+                            </div>
+                          </div>
+                          <br>
+                          <br>
+                          <br>
                           <br>
                           <div class="col-md-4">
                             <div class="mb-3">
